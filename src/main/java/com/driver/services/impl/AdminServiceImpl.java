@@ -79,7 +79,7 @@ public class AdminServiceImpl implements AdminService {
             return serviceProvider;
         }
         catch (Exception e){
-            throw  new Exception("Country not found");
+            throw  new Exception("User not found");
         }
     }
 }
