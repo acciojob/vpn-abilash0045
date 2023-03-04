@@ -75,10 +75,6 @@ public class User {
         this.maskedIp = maskedIp;
     }
 
-    public boolean isConnected() {
-        return connected;
-    }
-
     public boolean getConnected() {
         return connected;
     }

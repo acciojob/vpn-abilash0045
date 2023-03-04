@@ -26,23 +26,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(String username, String password, String countryName) throws Exception{
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        try {
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(password);
 
-        Country country = new Country();
-        String name = countryName.toUpperCase();
-        country.setCountryName(CountryName.valueOf(countryName));
-        country.setCode(CountryName.valueOf(countryName).toCode());
-        country.setUser(user);
+            Country country = new Country();
+            String name = countryName.toUpperCase();
+            country.setCountryName(CountryName.valueOf(name));
+            country.setCode(CountryName.valueOf(name).toCode());
+            country.setUser(user);
 
-        user.setOriginalCountry(country);
-        user.setOriginalCountry(country);
-        user.setOriginalIp(country.getCode()+"."+user.getId());
+            user.setOriginalCountry(country);
+            user.setOriginalCountry(country);
+            user.setOriginalIp(country.getCode() + "." + user.getId());
 
-        userRepository3.save(user);
+            userRepository3.save(user);
 
-        return user;
+            return user;
+        }
+        catch (Exception e){
+            throw new Exception("User not found");
+        }
     }
 
     @Override
