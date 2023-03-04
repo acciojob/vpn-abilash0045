@@ -18,12 +18,12 @@ public class User {
 
     private String originalIp;
 
-    private String mappedIp;
+    private String maskedIp;
 
     private boolean connected;
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    private Country country;
+    private Country originalCountry;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Connection> connectionList = new ArrayList<>();
@@ -33,16 +33,6 @@ public class User {
     List<ServiceProvider> serviceProviderList = new ArrayList<>();
 
     public User() {
-    }
-
-    public User(int id, String username, String password, String originalIp, String mappedIp, boolean connected, Country country) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.originalIp = originalIp;
-        this.mappedIp = mappedIp;
-        this.connected = connected;
-        this.country = country;
     }
 
     public int getId() {
@@ -77,15 +67,19 @@ public class User {
         this.originalIp = originalIp;
     }
 
-    public String getMappedIp() {
-        return mappedIp;
+    public String getMaskedIp() {
+        return maskedIp;
     }
 
-    public void setMappedIp(String mappedIp) {
-        this.mappedIp = mappedIp;
+    public void setMaskedIp(String maskedIp) {
+        this.maskedIp = maskedIp;
     }
 
     public boolean isConnected() {
+        return connected;
+    }
+
+    public boolean getConnected() {
         return connected;
     }
 
@@ -93,12 +87,21 @@ public class User {
         this.connected = connected;
     }
 
-    public Country getCountry() {
-        return country;
+//    public Country getCountry() {
+//        return country;
+//    }
+//
+//    public void setCountry(Country country) {
+//        this.country = country;
+//    }
+
+
+    public Country getOriginalCountry() {
+        return originalCountry;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setOriginalCountry(Country originalCountry) {
+        this.originalCountry = originalCountry;
     }
 
     public List<Connection> getConnectionList() {
