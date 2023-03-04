@@ -87,27 +87,30 @@ public class ConnectionServiceImpl implements ConnectionService {
     }
     @Override
     public User communicate(int senderId, int receiverId) throws Exception {
-
+//
         try {
             User sender = userRepository2.findById(senderId).get();
             User receiver = userRepository2.findById(receiverId).get();
 
-            String senderCountryCode, receiverCountryCode;
+            String senderCountryCode  = "", receiverCountryCode = "";
 
             senderCountryCode = sender.getOriginalCountry().getCode();
 
             if (receiver.getConnected()==true) {
-                String[] ip = receiver.getMaskedIp().split(".");
-                receiverCountryCode = ip[0];
+               String maskedId = receiver.getMaskedIp();
+               receiverCountryCode = maskedId.substring(0,3);
             } else {
-                String[] ip = receiver.getOriginalIp().split(".");
-                receiverCountryCode = ip[0];
+                receiverCountryCode = receiver.getOriginalCountry().getCode();
             }
 
-            if (!(senderCountryCode.equals(receiverCountryCode))) {
-                connect(senderId, receiver.getOriginalCountry().getCountryName().toString());
+            if ((senderCountryCode.equals(receiverCountryCode))) {
+                return sender;
             }
-            return sender;
+            else{
+                String countryName = sender.getOriginalCountry().getCountryName().name();
+                connect(senderId,countryName);
+                return sender;
+            }
         }catch (Exception e){
             throw new Exception("Cannot establish communication");
         }
