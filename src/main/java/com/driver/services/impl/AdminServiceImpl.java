@@ -62,8 +62,8 @@ public class AdminServiceImpl implements AdminService {
 
             Country country = new Country();
             String name = countryName.toUpperCase();
-            country.setCountryName(CountryName.valueOf(countryName));
-            country.setCode(CountryName.valueOf(countryName).toCode());
+            country.setCountryName(CountryName.valueOf(name));
+            country.setCode(CountryName.valueOf(name).toCode());
             country.setServiceProvider(serviceProvider);
 
             List<Country> countryList = serviceProvider.getCountryList();
