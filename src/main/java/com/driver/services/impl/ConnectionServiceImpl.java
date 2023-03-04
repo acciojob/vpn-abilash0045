@@ -104,15 +104,11 @@ public class ConnectionServiceImpl implements ConnectionService {
             }
 
             if ((senderCountryCode.equals(receiverCountryCode))) {
-                sender.setConnected(true);
-                receiver.setConnected(true);
                 return sender;
             }
             else{
                 String countryName = sender.getOriginalCountry().getCountryName().name();
                 connect(senderId,countryName);
-                sender.setConnected(true);
-                receiver.setConnected(true);
                 return sender;
             }
         }catch (Exception e){
