@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
+            user.setConnected(false);
 
             Country country = new Country();
             String name = countryName.toUpperCase();

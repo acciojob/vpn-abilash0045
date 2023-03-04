@@ -60,6 +60,10 @@ public class AdminServiceImpl implements AdminService {
         try {
             ServiceProvider serviceProvider = serviceProviderRepository1.findById(serviceProviderId).get();
 
+            if (serviceProvider == null){
+                throw new Exception("User not found");
+            }
+
             Country country = new Country();
             String name = countryName.toUpperCase();
             country.setCountryName(CountryName.valueOf(name));
