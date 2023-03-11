@@ -50,7 +50,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         }
 
         ServiceProvider serviceProvider = serviceProviderRepository2.findById(minId).get();
-        if (serviceProvider == null){
+        if (serviceProvider.equals(null)){
             throw new Exception("Unable to connect");
         }
         user.setConnected(true);
