@@ -50,6 +50,9 @@ public class ConnectionServiceImpl implements ConnectionService {
         }
 
         ServiceProvider serviceProvider = serviceProviderRepository2.findById(minId).get();
+        if (serviceProvider == null){
+            throw new Exception("Unable to connect");
+        }
         user.setConnected(true);
         user.setMaskedIp(CountryName.valueOf(countryName).toCode()+"."+serviceProvider.getId()+"."+user.getId());
 
