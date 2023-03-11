@@ -57,6 +57,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         connection.setServiceProvider(serviceProvider);
         connection.setUser(user);
 
+
         List<Connection> userConnectionList = user.getConnectionList();
         userConnectionList.add(connection);
         user.setConnectionList(userConnectionList);
@@ -109,8 +110,11 @@ public class ConnectionServiceImpl implements ConnectionService {
             else{
                 String countryName = sender.getOriginalCountry().getCountryName().name();
                 connect(senderId,countryName);
+                userRepository2.save(sender);
+                userRepository2.save(receiver);
                 return sender;
             }
+
         }catch (Exception e){
             throw new Exception("Cannot establish communication");
         }
